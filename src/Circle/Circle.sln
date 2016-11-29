@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Circle", "Circle\Circle.sfproj", "{FCC386E2-2BEF-461E-A821-7BFD86942C1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Article", "Article\Article.csproj", "{4EE21B7B-ECB6-4782-92B9-80D029084B86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Article.Interfaces", "Article.Interfaces\Article.Interfaces.csproj", "{26D8BD8D-7C05-4F07-AC08-018FAFCF6C40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circle.WebAPI", "Circle.WebAPI\Circle.WebAPI.csproj", "{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCC386E2-2BEF-461E-A821-7BFD86942C1E}.Debug|x64.ActiveCfg = Debug|x64
+		{FCC386E2-2BEF-461E-A821-7BFD86942C1E}.Debug|x64.Build.0 = Debug|x64
+		{FCC386E2-2BEF-461E-A821-7BFD86942C1E}.Debug|x64.Deploy.0 = Debug|x64
+		{FCC386E2-2BEF-461E-A821-7BFD86942C1E}.Release|x64.ActiveCfg = Release|x64
+		{FCC386E2-2BEF-461E-A821-7BFD86942C1E}.Release|x64.Build.0 = Release|x64
+		{FCC386E2-2BEF-461E-A821-7BFD86942C1E}.Release|x64.Deploy.0 = Release|x64
+		{4EE21B7B-ECB6-4782-92B9-80D029084B86}.Debug|x64.ActiveCfg = Debug|x64
+		{4EE21B7B-ECB6-4782-92B9-80D029084B86}.Debug|x64.Build.0 = Debug|x64
+		{4EE21B7B-ECB6-4782-92B9-80D029084B86}.Release|x64.ActiveCfg = Release|x64
+		{4EE21B7B-ECB6-4782-92B9-80D029084B86}.Release|x64.Build.0 = Release|x64
+		{26D8BD8D-7C05-4F07-AC08-018FAFCF6C40}.Debug|x64.ActiveCfg = Debug|x64
+		{26D8BD8D-7C05-4F07-AC08-018FAFCF6C40}.Debug|x64.Build.0 = Debug|x64
+		{26D8BD8D-7C05-4F07-AC08-018FAFCF6C40}.Release|x64.ActiveCfg = Release|x64
+		{26D8BD8D-7C05-4F07-AC08-018FAFCF6C40}.Release|x64.Build.0 = Release|x64
+		{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}.Debug|x64.ActiveCfg = Debug|x64
+		{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}.Debug|x64.Build.0 = Debug|x64
+		{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}.Release|x64.ActiveCfg = Release|x64
+		{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
