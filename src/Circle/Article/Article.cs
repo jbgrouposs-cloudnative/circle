@@ -31,12 +31,25 @@ namespace Article
         {
         }
 
-        public async Task<ArticleData> Get()
+        public async Task AddComment(CommentData comment)
+        {
+            var commentList = await this.GetCommentDataList();
+            commentList.Comments.Add(comment);
+
+            await this.StateManager.SetStateAsync(typeof(CommentDataList).FullName, commentList);
+        }
+
+        public async Task<CommentDataList> GetCommentDataList()
+        {
+            return await this.StateManager.GetOrAddStateAsync(typeof(CommentDataList).FullName, new CommentDataList());
+        }
+
+        public async Task<ArticleData> GetData()
         {
             return await this.StateManager.GetOrAddStateAsync(typeof(ArticleData).FullName, new ArticleData());
         }
 
-        public async Task Update(ArticleData data)
+        public async Task Save(ArticleData data)
         {
             await this.StateManager.SetStateAsync(typeof(ArticleData).FullName, data);
         }

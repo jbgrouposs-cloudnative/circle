@@ -8,14 +8,34 @@ using Microsoft.ServiceFabric.Actors;
 namespace Article.Interfaces
 {
     /// <summary>
-    /// This interface defines the methods exposed by an actor.
-    /// Clients use this interface to interact with the actor that implements it.
+    /// 記事関連のデータを処理するアクター
     /// </summary>
     public interface IArticle : IActor
     {
+        /// <summary>
+        /// 記事データを取得する
+        /// </summary>
+        /// <returns></returns>
+        Task<ArticleData> GetData();
 
-        Task<ArticleData> Get();
+        /// <summary>
+        /// 記事データを保存する
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        Task Save(ArticleData data);
 
-        Task Update(ArticleData data);
+        /// <summary>
+        /// 記事に対するコメント一覧を取得する
+        /// </summary>
+        /// <returns></returns>
+        Task<CommentDataList> GetCommentDataList();
+
+        /// <summary>
+        /// コメントを追加する
+        /// </summary>
+        /// <param name="comment"></param>
+        /// <returns></returns>
+        Task AddComment(CommentData comment);
     }
 }

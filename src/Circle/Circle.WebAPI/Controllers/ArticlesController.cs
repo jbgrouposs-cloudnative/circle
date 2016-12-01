@@ -18,7 +18,7 @@ namespace Circle.WebAPI.Controllers
             var actorId = new ActorId("00000000-0000-0000-0000-000000000000");
             var article = ActorProxy.Create<IArticle>(actorId, "fabric:/Circle");
 
-            return await article.Get();
+            return await article.GetData();
         }
 
         // POST api/articles?title=abc&body=aaaaaaaaaaaa
@@ -28,7 +28,7 @@ namespace Circle.WebAPI.Controllers
             var actorId = new ActorId("00000000-0000-0000-0000-000000000000");
             var article = ActorProxy.Create<IArticle>(actorId, "fabric:/Circle");
 
-            await article.Update(new ArticleData()
+            await article.Save(new ArticleData()
             {
                 Title = title,
                 Body = body,

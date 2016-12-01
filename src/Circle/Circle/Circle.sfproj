@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Article\Article.csproj" />
     <ProjectReference Include="..\Circle.WebAPI\Circle.WebAPI.csproj" />
+    <ProjectReference Include="..\User\User.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <PropertyGroup>

@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Article.Interfaces", "Artic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circle.WebAPI", "Circle.WebAPI\Circle.WebAPI.csproj", "{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Circle.Actors", "Circle.Actors", "{B58F1B8D-5C3E-49DF-A4EF-C130CED5F1D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User", "User\User.csproj", "{04874130-B6BA-4222-BE96-C6102D51B8F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User.Interfaces", "User.Interfaces\User.Interfaces.csproj", "{D0B77F8E-CDA4-4FFB-9268-E501277BF033}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -35,8 +41,22 @@ Global
 		{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}.Debug|x64.Build.0 = Debug|x64
 		{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}.Release|x64.ActiveCfg = Release|x64
 		{987E500A-F2F7-4F5E-A770-6A39E35EFF2E}.Release|x64.Build.0 = Release|x64
+		{04874130-B6BA-4222-BE96-C6102D51B8F1}.Debug|x64.ActiveCfg = Debug|x64
+		{04874130-B6BA-4222-BE96-C6102D51B8F1}.Debug|x64.Build.0 = Debug|x64
+		{04874130-B6BA-4222-BE96-C6102D51B8F1}.Release|x64.ActiveCfg = Release|x64
+		{04874130-B6BA-4222-BE96-C6102D51B8F1}.Release|x64.Build.0 = Release|x64
+		{D0B77F8E-CDA4-4FFB-9268-E501277BF033}.Debug|x64.ActiveCfg = Debug|x64
+		{D0B77F8E-CDA4-4FFB-9268-E501277BF033}.Debug|x64.Build.0 = Debug|x64
+		{D0B77F8E-CDA4-4FFB-9268-E501277BF033}.Release|x64.ActiveCfg = Release|x64
+		{D0B77F8E-CDA4-4FFB-9268-E501277BF033}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EE21B7B-ECB6-4782-92B9-80D029084B86} = {B58F1B8D-5C3E-49DF-A4EF-C130CED5F1D7}
+		{26D8BD8D-7C05-4F07-AC08-018FAFCF6C40} = {B58F1B8D-5C3E-49DF-A4EF-C130CED5F1D7}
+		{04874130-B6BA-4222-BE96-C6102D51B8F1} = {B58F1B8D-5C3E-49DF-A4EF-C130CED5F1D7}
+		{D0B77F8E-CDA4-4FFB-9268-E501277BF033} = {B58F1B8D-5C3E-49DF-A4EF-C130CED5F1D7}
 	EndGlobalSection
 EndGlobal

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Article.Interfaces
 {
+    /// <summary>
+    /// フィード情報
+    /// </summary>
     public class ArticleData
     {
         /// <summary>
