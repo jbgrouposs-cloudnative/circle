@@ -3,7 +3,7 @@
 ログイン認証APIでは、以下のAPIを提供する。
 
 |API名称|説明|
-|:-|:-|
+|---|---|
 |login|認証が必要なAPIを呼び出すためのトークン値を取得する|
 
 # login API仕様
@@ -17,7 +17,7 @@ login APIについて、取り扱うパラメータ情報およびAPI呼出を�
 login APIの呼出時にセットするパラメータは、以下の通りである。
 
 |パラメータ名称|パラメータ種別|説明|
-|:-|
+|---|---|---|
 |id|POST Body|ユーザID|
 |password|POST Body|パスワード文字列|
 
@@ -43,9 +43,9 @@ curl https://restapi.example.com/login -X POST -d '{ "id" : "user@example.com", 
 
 login APIの呼出結果として得られるパラメータは、以下の通りである。
 
-|パラメータ名称|説明|
-|:-|
-|access_token|認証が必要なAPIを呼び出すためのトークン値|
+| パラメータ名称 | 説明 |
+| --- | --- |
+| access_token | 認証が必要なAPIを呼び出すためのトークン値 |
 
 ### ステータスコード
 
