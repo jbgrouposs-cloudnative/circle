@@ -3,5 +3,6 @@
   <Parameters>
     <Parameter Name="WebAPI_InstanceCount" Value="1" />
     <Parameter Name="ArticleActorService_PartitionCount" Value="1" />
+    <Parameter Name="UserActorService_PartitionCount" Value="1" />
   </Parameters>
 </Application>
