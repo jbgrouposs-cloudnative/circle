@@ -34,7 +34,7 @@ User-Agent: RESTfulAPI-Client
 ### Curlコマンドによるリクエスト例
 
 ```
-curl https://restapi.example.com/login -X POST -d '{ "id" : "user@example.com", "password" : "passw0rd" }'
+curl http://localhost:8475/login -X POST -d "{ 'id':'user@example.com', 'password':'passw0rd' }" -H "Content-Type: application/json"
 ```
 
 ## HTTPレスポンス仕様
