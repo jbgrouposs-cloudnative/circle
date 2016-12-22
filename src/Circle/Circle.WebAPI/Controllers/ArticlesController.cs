@@ -25,15 +25,35 @@ namespace Circle.WebAPI.Controllers
         public async Task Post(string title, string body)
         {
             // POSTされたデータから新しいArticleアクターを作成する
-            ActorId.CreateRandom();
             var actorId = new ActorId("00000000-0000-0000-0000-000000000000");
             var article = ActorProxy.Create<IArticle>(actorId, "fabric:/Circle");
 
             await article.Save(new ArticleData()
             {
-                Title = title,
-                Body = body,
-                Published = DateTime.UtcNow
+                //フィード管理ID(アクターID)
+                FeedID = actorId.ToString(),
+                //フィード登録タグ配列
+                FeedTags = new string[5] { "TestTag1", "TestTag2", "TestTag3", "TestTag4", "TestTag5" },
+                //フィードタイトル
+                FeedTitle = title,
+                //フィード本文
+                FeedBody = body,
+                //フィード投稿者ID
+                PostUserID = "TestDummyUser",
+                //フィード投稿日時
+                PostDateTime = DateTime.UtcNow,
+                //フィード更新者ID
+                UpdateUserID = null,
+                //フィード更新日時
+                UpdateDateTime = DateTime.MinValue,
+                //いいね数、どう取得するか要検討
+                FavNum = 0,
+                //コメント数、どう取得するか要検討
+                CommentNum = 0,
+                //投稿方法区分(0:通常投稿 1:下書投稿 2:限定共有投稿)
+                PostType = 0,
+                //新着フィードフラグ
+                NewFeedFlag = true
             });
         }
     }
