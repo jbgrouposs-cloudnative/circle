@@ -118,7 +118,7 @@ getFeedList APIの処理結果のステータスを表すコードは以下の�
 
 ```
 {
-    "statusCode" : "600",
+    "statusCode" : "400",
     "statusMessage" : "getFeedList Failure"
 }
 ```
