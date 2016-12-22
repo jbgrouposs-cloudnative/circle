@@ -8,6 +8,10 @@ using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Actors.Client;
 using User.Interfaces;
 
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
 namespace User
 {
     /// <remarks>
@@ -36,6 +40,28 @@ namespace User
             var p = await this.GetProperties();
             var hashedPassword = p.HashedPassword;
 
+
+            // passwordをUTF-8エンコードでバイト配列化
+            byte[] byteValue = Encoding.UTF8.GetBytes(password);
+
+            // SHA1のハッシュ値を取得する
+            SHA1 crypto = new SHA1CryptoServiceProvider();
+            byte[] hashValue = crypto.ComputeHash(byteValue);
+
+            // バイト配列をUTF8エンコードで文字列化
+            StringBuilder hashedText = new StringBuilder();
+            for (int i = 0; i < hashValue.Length; i++)
+            {
+                hashedText.AppendFormat("{0:X2}", hashValue[i]);
+            }
+            String diffPass = hashedText.ToString();
+            Console.WriteLine("hashed text: " + diffPass);
+
+            if (hashedPassword.Equals(diffPass))
+            {
+                return p;
+
+            }
             return null;
         }
 
