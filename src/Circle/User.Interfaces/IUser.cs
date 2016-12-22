@@ -26,5 +26,11 @@ namespace User.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<UserProperties> GetProperties();
+
+        /// <summary>
+        /// プロパティ情報を設定する
+        /// </summary>
+        /// <returns></returns>
+        Task SetProperties(UserProperties properties);
     }
 }

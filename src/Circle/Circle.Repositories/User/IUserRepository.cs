@@ -15,5 +15,12 @@ namespace Circle.Repositories.User
         /// <param name="id"></param>
         /// <returns></returns>
         IUser FindById(string id);
+
+        /// <summary>
+        /// 新規ユーザを作成する
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <returns></returns>
+        Task<IUser> CreateAsync(UserProperties properties);
     }
 }

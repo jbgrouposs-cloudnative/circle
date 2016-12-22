@@ -41,9 +41,13 @@ namespace User
 
         public async Task<UserProperties> GetProperties()
         {
-            return await Task.Run<UserProperties>(() => (UserProperties)null);
+            return await this.StateManager.GetOrAddStateAsync(typeof(UserProperties).FullName, (UserProperties)null);
         }
 
+        public async Task SetProperties(UserProperties properties)
+        {
+            await this.StateManager.SetStateAsync(typeof(UserProperties).FullName, properties);
+        }
 
 
         /// <summary>

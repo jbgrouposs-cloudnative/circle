@@ -6,6 +6,11 @@
     public class UserProperties
     {
         /// <summary>
+        /// UserアクターのActorId
+        /// </summary>
+        public string ActorId { get; set; }
+
+        /// <summary>
         /// ログイン用ID
         /// </summary>
         public string Id { get; set; }
@@ -34,5 +39,6 @@
         /// 認証トークン
         /// </summary>
         public string Token { get; set; }
+
     }
 }
