@@ -25,6 +25,7 @@ namespace Circle.WebAPI.Controllers
         public async Task Post(string title, string body)
         {
             // POSTされたデータから新しいArticleアクターを作成する
+            ActorId.CreateRandom();
             var actorId = new ActorId("00000000-0000-0000-0000-000000000000");
             var article = ActorProxy.Create<IArticle>(actorId, "fabric:/Circle");
 

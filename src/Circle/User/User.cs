@@ -31,45 +31,20 @@ namespace User
         {
         }
 
-        public Task<UserData> GetData()
+        public async Task<UserProperties> Login(string id, string password)
         {
-            throw new NotImplementedException();
+            var p = await this.GetProperties();
+            var hashedPassword = p.HashedPassword;
+
+            return null;
         }
 
-        public Task<ArticleDataDraftList> GetDraftArticles()
+        public async Task<UserProperties> GetProperties()
         {
-            throw new NotImplementedException();
+            return await Task.Run<UserProperties>(() => (UserProperties)null);
         }
 
-        public Task<ArticleDataPublishedList> GetPublishedArticles()
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<ArticleDataStockedList> GetStockedArticles()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Publish(global::Article.Interfaces.IArticle article)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Save(UserData data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SaveDraft(global::Article.Interfaces.IArticle article)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Stock(global::Article.Interfaces.IArticle article)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// This method is called whenever an actor is activated.

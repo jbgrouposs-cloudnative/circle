@@ -14,55 +14,17 @@ namespace User.Interfaces
     public interface IUser : IActor
     {
         /// <summary>
-        /// ユーザ情報を取得する
+        /// ログイン認証を行う
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="password"></param>
         /// <returns></returns>
-        Task<UserData> GetData();
+        Task<UserProperties> Login(string id, string password);
 
         /// <summary>
-        /// ユーザ情報を保存する
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        Task Save(UserData data);
-
-        /// <summary>
-        /// 下書きフィード情報の一覧を取得する
+        /// プロパティ情報を取得する
         /// </summary>
         /// <returns></returns>
-        Task<ArticleDataDraftList> GetDraftArticles();
-        
-        /// <summary>
-        /// 投稿済みフィード情報の一覧を取得する
-        /// </summary>
-        /// <returns></returns>
-        Task<ArticleDataPublishedList> GetPublishedArticles();
-
-        /// <summary>
-        /// ストックしたフィード情報の一覧を取得する
-        /// </summary>
-        /// <returns></returns>
-        Task<ArticleDataStockedList> GetStockedArticles();
-
-        /// <summary>
-        /// フィードを下書き保存する
-        /// </summary>
-        /// <param name="article"></param>
-        /// <returns></returns>
-        Task SaveDraft(IArticle article);
-
-        /// <summary>
-        /// フィードを投稿する
-        /// </summary>
-        /// <param name="article"></param>
-        /// <returns></returns>
-        Task Publish(IArticle article);
-
-        /// <summary>
-        /// フィードをストックする
-        /// </summary>
-        /// <param name="article"></param>
-        /// <returns></returns>
-        Task Stock(IArticle article);
+        Task<UserProperties> GetProperties();
     }
 }
