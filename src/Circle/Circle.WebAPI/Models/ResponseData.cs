@@ -51,5 +51,12 @@ namespace Circle.WebAPI.Models
                 Data = data
             };
         }
+
+        public static ResponseData<T> BuildUnknownError(string message) {
+            return new ResponseData<T>() {
+                StatusCode = "500",
+                StatusMessage = message
+            };
+        }
     }
 }

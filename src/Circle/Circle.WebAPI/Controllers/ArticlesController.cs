@@ -1,4 +1,6 @@
-﻿using Article.Interfaces;
+﻿using Circle.Repositories.Article;
+using Circle.Repositories.Comment;
+using Circle.WebAPI.Models;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
 using System;
@@ -6,55 +8,94 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Circle.WebAPI.Controllers
-{
+namespace Circle.WebAPI.Controllers {
     [ServiceRequestActionFilter]
-    public class ArticlesController : ApiController
-    {
-        // GET api/articles/5 
-        public async Task<ArticleData> Get(int id)
-        {
-            // Articleアクターの情報を返す
-            var actorId = new ActorId("00000000-0000-0000-0000-000000000000");
-            var article = ActorProxy.Create<IArticle>(actorId, "fabric:/Circle");
+    public class ArticlesController : ApiController {
+        private IArticleRepository articleRepository;
+        private ICommentRepository commentRepository;
 
-            return await article.GetData();
+        public ArticlesController(IArticleRepository articleRepository, ICommentRepository commentRepository) {
+            this.articleRepository = articleRepository;
+            this.commentRepository = commentRepository;
         }
 
-        // POST api/articles?title=abc&body=aaaaaaaaaaaa
-        public async Task Post(string title, string body)
-        {
-            // POSTされたデータから新しいArticleアクターを作成する
-            var actorId = ActorId.CreateRandom();
-            var article = ActorProxy.Create<IArticle>(actorId, "fabric:/Circle");
+        /// <summary>
+        /// 記事一覧の取得
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/articles")]
+        public ResponseData<List<ArticleData>> GetArticles() {
+            try {
+                var articles = articleRepository.GetArticles();
+                return ResponseData<List<ArticleData>>.BuildOK(articles);
+            }
+            catch( Exception e ) {
+                return ResponseData<List<ArticleData>>.BuildUnknownError(e.Message);
+            }
+        }
 
-            await article.Save(new ArticleData()
-            {
-                //フィード管理ID(アクターID)
-                FeedID = actorId.ToString(),
-                //フィード登録タグ配列
-                FeedTags = new string[5] { "TestTag1", "TestTag2", "TestTag3", "TestTag4", "TestTag5" },
-                //フィードタイトル
-                FeedTitle = title,
-                //フィード本文
-                FeedBody = body,
-                //フィード投稿者ID
-                PostUserID = "TestDummyUser",
-                //フィード投稿日時
-                PostDateTime = DateTime.UtcNow,
-                //フィード更新者ID
-                UpdateUserID = null,
-                //フィード更新日時
-                UpdateDateTime = DateTime.MinValue,
-                //いいね数、どう取得するか要検討
-                FavNum = 0,
-                //コメント数、どう取得するか要検討
-                CommentNum = 0,
-                //投稿方法区分(0:通常投稿 1:下書投稿 2:限定共有投稿)
-                PostType = 0,
-                //新着フィードフラグ
-                NewFeedFlag = true
-            });
+        /// <summary>
+        /// 記事詳細の取得
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
+        [Route("api/articles/{articleId:int}")]
+        public ResponseData<ArticleData> GetArticle(int articleId) {
+            try {
+                var article = articleRepository.GetArticle(articleId);
+                return ResponseData<ArticleData>.BuildOK(article);
+            }
+            catch( Exception e ) {
+                return ResponseData<ArticleData>.BuildUnknownError(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 記事投稿
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
+        [Route("api/articles")]
+        public ResponseData<ArticleData> PostArticle(ArticleData article) {
+            try {
+                var savedArticle = articleRepository.SaveArticle(article);
+                return ResponseData<ArticleData>.BuildOK(savedArticle);
+            }
+            catch( Exception e ) {
+                return ResponseData<ArticleData>.BuildUnknownError(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 記事のコメント一覧取得
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
+        [Route("api/articles/{articleId:int}/comments")]
+        public ResponseData<List<CommentData>> GetCommentsByArticle(int articleId) {
+            try {
+                var comments = commentRepository.GetComments(articleId);
+                return ResponseData<List<CommentData>>.BuildOK(comments);
+            }
+            catch( Exception e ) {
+                return ResponseData<List<CommentData>>.BuildUnknownError(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// コメント投稿
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
+        [Route("api/articles/{articleId:int}/comments")]
+        public ResponseData<CommentData> PostComment(int articleId, CommentData comment) {
+            try {
+                var savedComment = commentRepository.SaveComment(articleId, comment);
+                return ResponseData<CommentData>.BuildOK(savedComment);
+            }
+            catch( Exception e ) {
+                return ResponseData<CommentData>.BuildUnknownError(e.Message);
+            }
         }
     }
 }
