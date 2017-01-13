@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Circle.Repositories.Article {
-    public interface IArticleRepository {
+    public interface IArticleRepository : IDisposable {
 
         /// <summary>
         /// 記事一覧を取得する

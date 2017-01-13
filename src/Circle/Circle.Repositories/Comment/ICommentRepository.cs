@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Circle.Repositories.Comment {
-    public interface ICommentRepository {
+    public interface ICommentRepository : IDisposable {
         /// <summary>
         /// 記事のコメントを取得する
         /// </summary>

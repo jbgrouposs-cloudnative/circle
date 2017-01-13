@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Circle.WebAPI.Controllers {
+
     [ServiceRequestActionFilter]
     public class ArticlesController : ApiController {
         private IArticleRepository articleRepository;
@@ -96,6 +97,13 @@ namespace Circle.WebAPI.Controllers {
             catch( Exception e ) {
                 return ResponseData<CommentData>.BuildUnknownError(e.Message);
             }
+        }
+
+
+        public new void Dispose() {
+            articleRepository.Dispose();
+            commentRepository.Dispose();
+            base.Dispose();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Circle.WebAPI {
             container.RegisterType<IArticleRepository, ArticleRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<ICommentRepository, CommentRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityDependencyResolver(container);
-            
+
             appBuilder.UseWebApi(config);
         }
     }
