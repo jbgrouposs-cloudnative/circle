@@ -64,27 +64,28 @@ namespace Circle.WebAPI.Controllers.Tests {
 
         [TestMethod]
         public void SaveArticle() {
+            Task.Run(async () => {
+                using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
+                    try {
+                        var r1 = await articlesController.PostArticle(new ArticleData() {
+                            AuthorName = "高木俊一",
+                            Body = "記事本文",
+                            Created = DateTime.Now,
+                            Title = "記事タイトル",
+                            Updated = DateTime.Now
+                        });
 
-            using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
-                try {
-                    var r1 = articlesController.PostArticle(new ArticleData() {
-                        AuthorName = "高木俊一",
-                        Body = "記事本文",
-                        Created = DateTime.Now,
-                        Title = "記事タイトル",
-                        Updated = DateTime.Now
-                    });
+                        Assert.IsNotNull(r1);
+                        Assert.AreEqual("高木俊一", r1.AuthorName);
+                        Assert.AreEqual("記事本文", r1.Body);
+                        Assert.AreEqual("記事タイトル", r1.Title);
 
-                    Assert.IsNotNull(r1);
-                    Assert.AreEqual("高木俊一", r1.AuthorName);
-                    Assert.AreEqual("記事本文", r1.Body);
-                    Assert.AreEqual("記事タイトル", r1.Title);
-
+                    }
+                    catch( Exception e ) {
+                        Assert.Fail(e.Message, e);
+                    }
                 }
-                catch( Exception e ) {
-                    Assert.Fail(e.Message, e);
-                }
-            }
+            }).GetAwaiter().GetResult();
         }
 
         [TestMethod]
