@@ -4,6 +4,7 @@ using Unity.WebApi;
 using Microsoft.Practices.Unity;
 using Circle.Repositories.Article;
 using Circle.Repositories.Comment;
+using Swashbuckle.Application;
 
 namespace Circle.WebAPI {
     public static class Startup {
@@ -13,6 +14,8 @@ namespace Circle.WebAPI {
             // Configure Web API for self-host. 
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
+
+            config.EnableSwagger(c => c.SingleApiVersion("v1", "Circle.WebAPI")).EnableSwaggerUi();
 
             var container = new UnityContainer();
             container.RegisterType<IArticleRepository, ArticleRepository>(new HierarchicalLifetimeManager());
