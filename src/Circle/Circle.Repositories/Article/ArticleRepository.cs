@@ -39,13 +39,11 @@ namespace Circle.Repositories.Article {
 
         public async Task<ArticleData> SaveArticle(ArticleData article)
         {
-            throw new NotImplementedException();
-
-            Uri collectionLink = UriFactory.CreateDocumentCollectionUri(databaseId, collectionId);
-            Document created = await client.CreateDocumentAsync(collectionLink, article);
+            Uri collectionLink = UriFactory.CreateDocumentCollectionUri(this.dbname, this.colname);
+            Document created = await client.CreateDocumentAsync(this.colname, article);
 
             return article;
-
+            // throw new NotImplementedException();
         }
 
         public void Dispose() {
