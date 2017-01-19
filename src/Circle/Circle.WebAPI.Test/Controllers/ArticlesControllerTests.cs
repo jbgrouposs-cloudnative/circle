@@ -16,10 +16,14 @@ namespace Circle.WebAPI.Controllers.Tests {
         public void GetArticles() {
 
             using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
-                var r = articlesController.GetArticles();
+                try {
+                    var r = articlesController.GetArticles();
 
-                Assert.AreEqual("200", r.StatusCode);
-                Assert.AreEqual("OK", r.StatusMessage);
+                    Assert.IsNotNull(r);
+                }
+                catch(Exception e) {
+                    Assert.Fail(e.Message, e);
+                }
             }
         }
 
@@ -28,11 +32,15 @@ namespace Circle.WebAPI.Controllers.Tests {
             var articleId = 1;
 
             using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
-                var r = articlesController.GetArticle(articleId);
+                try {
+                    var r = articlesController.GetArticle(articleId);
 
-                Assert.AreEqual("200", r.StatusCode);
-                Assert.AreEqual("OK", r.StatusMessage);
-                Assert.AreEqual(articleId, r.Data.Id);
+                    Assert.IsNotNull(r);
+                    Assert.AreEqual(articleId, r.Id);
+                }
+                catch( Exception e ) {
+                    Assert.Fail(e.Message, e);
+                }
             }
         }
 
@@ -41,10 +49,15 @@ namespace Circle.WebAPI.Controllers.Tests {
             var articleId = 1;
 
             using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
-                var r = articlesController.GetCommentsByArticle(articleId);
+                try {
+                    var r = articlesController.GetCommentsByArticle(articleId);
 
-                Assert.AreEqual("200", r.StatusCode);
-                Assert.AreEqual("OK", r.StatusMessage);
+                    Assert.IsNotNull(r);
+
+                }
+                catch( Exception e ) {
+                    Assert.Fail(e.Message, e);
+                }
             }
         }
 
@@ -53,41 +66,52 @@ namespace Circle.WebAPI.Controllers.Tests {
         public void SaveArticle() {
 
             using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
-                var r1 = articlesController.PostArticle(new ArticleData() {
-                    AuthorName = "高木俊一",
-                    Body = "記事本文",
-                    Created = DateTime.Now,
-                    Title = "記事タイトル",
-                    Updated = DateTime.Now
-                });
+                try {
+                    var r1 = articlesController.PostArticle(new ArticleData() {
+                        AuthorName = "高木俊一",
+                        Body = "記事本文",
+                        Created = DateTime.Now,
+                        Title = "記事タイトル",
+                        Updated = DateTime.Now
+                    });
 
-                Assert.AreEqual("200", r1.StatusCode);
-                Assert.AreEqual("OK", r1.StatusMessage);
-                Assert.AreEqual("高木俊一", r1.Data.AuthorName);
-                Assert.AreEqual("記事本文", r1.Data.Body);
-                Assert.AreEqual("記事タイトル", r1.Data.Title);
+                    Assert.IsNotNull(r1);
+                    Assert.AreEqual("高木俊一", r1.AuthorName);
+                    Assert.AreEqual("記事本文", r1.Body);
+                    Assert.AreEqual("記事タイトル", r1.Title);
+
+                }
+                catch( Exception e ) {
+                    Assert.Fail(e.Message, e);
+                }
             }
         }
-        
+
         [TestMethod]
         public void SaveArticleAndGet() {
 
             using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
-                var r1 = articlesController.PostArticle(new ArticleData() {
-                    AuthorName = "高木俊一",
-                    Body = "記事本文",
-                    Created = DateTime.Now,
-                    Title = "記事タイトル",
-                    Updated = DateTime.Now
-                });
+                try {
+                    var r1 = articlesController.PostArticle(new ArticleData() {
+                        AuthorName = "高木俊一",
+                        Body = "記事本文",
+                        Created = DateTime.Now,
+                        Title = "記事タイトル",
+                        Updated = DateTime.Now
+                    });
 
-                var r2 = articlesController.GetArticle(r1.Data.Id);
+                    var r2 = articlesController.GetArticle(r1.Id);
 
-                Assert.AreEqual("200", r2.StatusCode);
-                Assert.AreEqual("OK", r2.StatusMessage);
-                Assert.AreEqual("高木俊一", r2.Data.AuthorName);
-                Assert.AreEqual("記事本文", r2.Data.Body);
-                Assert.AreEqual("記事タイトル", r2.Data.Title);
+
+                    Assert.IsNotNull(r2);
+                    Assert.AreEqual("高木俊一", r2.AuthorName);
+                    Assert.AreEqual("記事本文", r2.Body);
+                    Assert.AreEqual("記事タイトル", r2.Title);
+
+                }
+                catch( Exception e ) {
+                    Assert.Fail(e.Message, e);
+                }
             }
         }
 
@@ -95,25 +119,30 @@ namespace Circle.WebAPI.Controllers.Tests {
         public void SaveArticleAndGetAll() {
 
             using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
-                var r1 = articlesController.PostArticle(new ArticleData() {
-                    AuthorName = "高木俊一",
-                    Body = "記事本文",
-                    Created = DateTime.Now,
-                    Title = "記事タイトル",
-                    Updated = DateTime.Now
-                });
+                try {
+                    var r1 = articlesController.PostArticle(new ArticleData() {
+                        AuthorName = "高木俊一",
+                        Body = "記事本文",
+                        Created = DateTime.Now,
+                        Title = "記事タイトル",
+                        Updated = DateTime.Now
+                    });
 
-                var r2 = articlesController.GetArticles();
+                    var r2 = articlesController.GetArticles();
 
-                Assert.AreEqual("200", r2.StatusCode);
-                Assert.AreEqual("OK", r2.StatusMessage);
+                    Assert.IsNotNull(r2);
 
-                var article = r2.Data.Where(a => a.Id == r1.Data.Id).SingleOrDefault();
+                    var article = r2.Where(a => a.Id == r1.Id).SingleOrDefault();
 
-                Assert.IsNotNull(article);
-                Assert.AreEqual("高木俊一", article.AuthorName);
-                Assert.AreEqual("記事本文", article.Body);
-                Assert.AreEqual("記事タイトル", article.Title);
+                    Assert.IsNotNull(article);
+                    Assert.AreEqual("高木俊一", article.AuthorName);
+                    Assert.AreEqual("記事本文", article.Body);
+                    Assert.AreEqual("記事タイトル", article.Title);
+
+                }
+                catch( Exception e ) {
+                    Assert.Fail(e.Message, e);
+                }
             }
         }
 
@@ -121,18 +150,23 @@ namespace Circle.WebAPI.Controllers.Tests {
         public void SaveComment() {
 
             using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
-                var r1 = articlesController.PostArticle(new ArticleData());
-                var r2 = articlesController.PostComment(r1.Data.Id, new CommentData() {
-                    Body = "コメント本文",
-                    Created = DateTime.Now,
-                    OwnerName = "高木俊一",
-                    Updated = DateTime.Now
-                });
+                try {
+                    var r1 = articlesController.PostArticle(new ArticleData());
+                    var r2 = articlesController.PostComment(r1.Id, new CommentData() {
+                        Body = "コメント本文",
+                        Created = DateTime.Now,
+                        OwnerName = "高木俊一",
+                        Updated = DateTime.Now
+                    });
 
-                Assert.AreEqual("200", r2.StatusCode);
-                Assert.AreEqual("OK", r2.StatusMessage);
-                Assert.AreEqual("コメント本文", r2.Data.Body);
-                Assert.AreEqual("高木俊一", r2.Data.OwnerName);
+                    Assert.IsNotNull(r2);
+                    Assert.AreEqual("コメント本文", r2.Body);
+                    Assert.AreEqual("高木俊一", r2.OwnerName);
+
+                }
+                catch( Exception e ) {
+                    Assert.Fail(e.Message, e);
+                }
             }
         }
 
@@ -141,18 +175,17 @@ namespace Circle.WebAPI.Controllers.Tests {
 
             using( var articlesController = new ArticlesController(new ArticleRepository(), new CommentRepository()) ) {
                 var r1 = articlesController.PostArticle(new ArticleData());
-                var r2 = articlesController.PostComment(r1.Data.Id, new CommentData() {
+                var r2 = articlesController.PostComment(r1.Id, new CommentData() {
                     Body = "コメント本文",
                     Created = DateTime.Now,
                     OwnerName = "高木俊一",
                     Updated = DateTime.Now
                 });
 
-                Assert.AreEqual("200", r2.StatusCode);
-                Assert.AreEqual("OK", r2.StatusMessage);
+                Assert.IsNotNull(r2);
 
-                var r3 = articlesController.GetCommentsByArticle(r1.Data.Id);
-                var comment = r3.Data.Where(c => c.Id == r2.Data.Id).SingleOrDefault();
+                var r3 = articlesController.GetCommentsByArticle(r1.Id);
+                var comment = r3.Where(c => c.Id == r2.Id).SingleOrDefault();
 
                 Assert.IsNotNull(comment);
                 Assert.AreEqual("コメント本文", comment.Body);

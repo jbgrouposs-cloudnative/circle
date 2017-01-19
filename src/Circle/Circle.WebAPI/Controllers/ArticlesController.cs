@@ -5,12 +5,14 @@ using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Circle.WebAPI.Controllers {
 
     [ServiceRequestActionFilter]
+    [RoutePrefix("api")]
     public class ArticlesController : ApiController {
         private IArticleRepository articleRepository;
         private ICommentRepository commentRepository;
@@ -24,14 +26,14 @@ namespace Circle.WebAPI.Controllers {
         /// 記事一覧の取得
         /// </summary>
         /// <returns></returns>
-        [Route("api/articles")]
-        public ResponseData<List<ArticleData>> GetArticles() {
+        [Route("articles")]
+        public List<ArticleData> GetArticles() {
             try {
                 var articles = articleRepository.GetArticles();
-                return ResponseData<List<ArticleData>>.BuildOK(articles);
+                return articles;
             }
-            catch( Exception e ) {
-                return ResponseData<List<ArticleData>>.BuildUnknownError(e.Message);
+            catch( Exception ) {
+                throw new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
@@ -40,14 +42,14 @@ namespace Circle.WebAPI.Controllers {
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        [Route("api/articles/{articleId:int}")]
-        public ResponseData<ArticleData> GetArticle(int articleId) {
+        [Route("articles /{articleId: int}")]
+        public ArticleData GetArticle(int articleId) {
             try {
                 var article = articleRepository.GetArticle(articleId);
-                return ResponseData<ArticleData>.BuildOK(article);
+                return article;
             }
-            catch( Exception e ) {
-                return ResponseData<ArticleData>.BuildUnknownError(e.Message);
+            catch( Exception ) {
+                throw new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
@@ -56,14 +58,14 @@ namespace Circle.WebAPI.Controllers {
         /// </summary>
         /// <param name="article"></param>
         /// <returns></returns>
-        [Route("api/articles")]
-        public ResponseData<ArticleData> PostArticle(ArticleData article) {
+        [Route("articles")]
+        public ArticleData PostArticle(ArticleData article) {
             try {
                 var savedArticle = articleRepository.SaveArticle(article);
-                return ResponseData<ArticleData>.BuildOK(savedArticle);
+                return savedArticle;
             }
-            catch( Exception e ) {
-                return ResponseData<ArticleData>.BuildUnknownError(e.Message);
+            catch( Exception ) {
+                throw new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
@@ -72,14 +74,14 @@ namespace Circle.WebAPI.Controllers {
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        [Route("api/articles/{articleId:int}/comments")]
-        public ResponseData<List<CommentData>> GetCommentsByArticle(int articleId) {
+        [Route("articles/{articleId:int}/comments")]
+        public List<CommentData> GetCommentsByArticle(int articleId) {
             try {
                 var comments = commentRepository.GetComments(articleId);
-                return ResponseData<List<CommentData>>.BuildOK(comments);
+                return comments;
             }
-            catch( Exception e ) {
-                return ResponseData<List<CommentData>>.BuildUnknownError(e.Message);
+            catch( Exception ) {
+                throw new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
@@ -88,14 +90,14 @@ namespace Circle.WebAPI.Controllers {
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        [Route("api/articles/{articleId:int}/comments")]
-        public ResponseData<CommentData> PostComment(int articleId, CommentData comment) {
+        [Route("articles/{articleId:int}/comments")]
+        public CommentData PostComment(int articleId, CommentData comment) {
             try {
                 var savedComment = commentRepository.SaveComment(articleId, comment);
-                return ResponseData<CommentData>.BuildOK(savedComment);
+                return savedComment;
             }
-            catch( Exception e ) {
-                return ResponseData<CommentData>.BuildUnknownError(e.Message);
+            catch( Exception ) {
+                throw new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
