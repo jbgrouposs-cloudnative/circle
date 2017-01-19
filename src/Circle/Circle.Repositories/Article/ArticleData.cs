@@ -40,5 +40,10 @@ namespace Circle.Repositories.Article {
         /// 更新日時
         /// </summary>
         public DateTime Updated { get; set; }
+
+        public static implicit operator ArticleData(Task<ArticleData> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

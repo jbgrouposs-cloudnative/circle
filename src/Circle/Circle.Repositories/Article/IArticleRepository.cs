@@ -25,6 +25,6 @@ namespace Circle.Repositories.Article {
         /// </summary>
         /// <param name="article"></param>
         /// <returns></returns>
-        ArticleData SaveArticle(ArticleData article);
+        Task<ArticleData> SaveArticle(ArticleData article);
     }
 }
