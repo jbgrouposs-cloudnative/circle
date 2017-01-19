@@ -59,7 +59,7 @@ namespace Circle.WebAPI.Controllers {
         [Route("api/articles")]
         public ResponseData<ArticleData> PostArticle(ArticleData article) {
             try {
-                var savedArticle = articleRepository.SaveArticle(article);
+                Task<ArticleData> savedArticle = articleRepository.SaveArticle(article);
                 return ResponseData<ArticleData>.BuildOK(savedArticle);
             }
             catch( Exception e ) {

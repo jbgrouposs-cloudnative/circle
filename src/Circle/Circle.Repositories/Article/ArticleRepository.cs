@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Documents.Client;
+﻿using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,6 +11,8 @@ namespace Circle.Repositories.Article {
     public class ArticleRepository : IArticleRepository {
 
         // DocumentDBクライアント
+        private static readonly string databaseId = ConfigurationManager.AppSettings["DatabaseId"];
+        private static readonly string collectionId = "ArticleData";
         private DocumentClient client;
 
         public ArticleRepository() {
@@ -24,8 +27,15 @@ namespace Circle.Repositories.Article {
             throw new NotImplementedException();
         }
 
-        public ArticleData SaveArticle(ArticleData article) {
+        public async Task<ArticleData> SaveArticle(ArticleData article)
+        {
             throw new NotImplementedException();
+
+            Uri collectionLink = UriFactory.CreateDocumentCollectionUri(databaseId, collectionId);
+            Document created = await client.CreateDocumentAsync(collectionLink, article);
+
+            return article;
+
         }
 
         public void Dispose() {
