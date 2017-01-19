@@ -38,9 +38,17 @@ namespace Circle.Repositories.Article {
         public async Task<ArticleData> SaveArticle(ArticleData article)
         {
             Uri collectionLink = UriFactory.CreateDocumentCollectionUri(this.dbname, this.colname);
-            Document created = await client.CreateDocumentAsync(this.colname, article);
+            var created = await client.CreateDocumentAsync(collectionLink, article);
 
-            return article;
+            return new ArticleData()
+            {
+                Id = created.Resource.GetPropertyValue<int>("Id"),
+                Title = created.Resource.GetPropertyValue<string>("Title"), 
+                Body = created.Resource.GetPropertyValue<string>("Body"), 
+                AuthorName = created.Resource.GetPropertyValue<string>("AuthorName"),
+                Created = created.Resource.GetPropertyValue<DateTime>("Created"),
+                Updated = created.Resource.GetPropertyValue<DateTime>("Updated")
+            };
             // throw new NotImplementedException();
         }
 
