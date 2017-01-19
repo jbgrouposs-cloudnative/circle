@@ -11,8 +11,6 @@ namespace Circle.Repositories.Article {
     public class ArticleRepository : IArticleRepository {
 
         // DocumentDBクライアント
-        private static readonly string databaseId = ConfigurationManager.AppSettings["DatabaseId"];
-        private static readonly string collectionId = "ArticleData";
         private DocumentClient client;
         // DocumentDB DB名
         private string dbname = "CircleDB";
