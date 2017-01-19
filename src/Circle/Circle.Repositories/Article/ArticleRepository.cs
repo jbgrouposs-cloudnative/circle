@@ -11,13 +11,23 @@ namespace Circle.Repositories.Article {
 
         // DocumentDBクライアント
         private DocumentClient client;
+        // DocumentDB DB名
+        private string dbname = "CircleDB";
+        // DocumentDB コレクション名
+        private string colname = "Articles";
 
         public ArticleRepository() {
             this.client = DocumentDBResolver.GetClient(); // DocumentDBクライアントを取得
         }
 
         public ArticleData GetArticle(int articleId) {
-            throw new NotImplementedException();
+            FeedOptions queryOptions = new FeedOptions { MaxItemCount = -1 };
+
+            IQueryable<ArticleData> articleQuery = this.client.CreateDocumentQuery<ArticleData>(
+                UriFactory.CreateDocumentCollectionUri(this.dbname, this.colname), queryOptions).Where(f => f.Id == articleId
+                );
+            return articleQuery.SingleOrDefault();
+            // throw new NotImplementedException();
         }
 
         public List<ArticleData> GetArticles() {
