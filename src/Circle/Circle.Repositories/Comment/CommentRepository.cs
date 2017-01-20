@@ -10,6 +10,11 @@ namespace Circle.Repositories.Comment {
 
         // DocumentDBクライアント
         private DocumentClient client;
+        // DocumentDB DB名
+        private string dbname = "CircleDB";
+        // DocumentDB コレクション名
+        private string colname = "Comments";
+
 
         public CommentRepository() {
             this.client = DocumentDBResolver.GetClient(); // DocumentDBクライアントを取得
