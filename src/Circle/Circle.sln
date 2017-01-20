@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{62CF27E1-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circle.WebAPI.Test", "Circle.WebAPI.Test\Circle.WebAPI.Test.csproj", "{45666872-1FDC-42E1-84EE-669CBEFE855B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circle.Repositories.Mock", "Circle.Repositories.Mock\Circle.Repositories.Mock.csproj", "{4538625A-D3FF-4E88-B192-930A3BE46363}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,14 @@ Global
 		{45666872-1FDC-42E1-84EE-669CBEFE855B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{45666872-1FDC-42E1-84EE-669CBEFE855B}.Release|x64.ActiveCfg = Release|Any CPU
 		{45666872-1FDC-42E1-84EE-669CBEFE855B}.Release|x64.Build.0 = Release|Any CPU
+		{4538625A-D3FF-4E88-B192-930A3BE46363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4538625A-D3FF-4E88-B192-930A3BE46363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4538625A-D3FF-4E88-B192-930A3BE46363}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4538625A-D3FF-4E88-B192-930A3BE46363}.Debug|x64.Build.0 = Debug|Any CPU
+		{4538625A-D3FF-4E88-B192-930A3BE46363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4538625A-D3FF-4E88-B192-930A3BE46363}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4538625A-D3FF-4E88-B192-930A3BE46363}.Release|x64.ActiveCfg = Release|Any CPU
+		{4538625A-D3FF-4E88-B192-930A3BE46363}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

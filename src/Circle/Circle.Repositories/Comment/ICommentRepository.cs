@@ -11,7 +11,7 @@ namespace Circle.Repositories.Comment {
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        List<CommentData> GetComments(int articleId);
+        List<CommentData> GetComments(string articleId);
 
         /// <summary>
         /// 記事にコメントを付ける
@@ -19,6 +19,6 @@ namespace Circle.Repositories.Comment {
         /// <param name="articleId"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
-        CommentData SaveComment(int articleId, CommentData comment);
+        CommentData SaveComment(string articleId, CommentData comment);
     }
 }

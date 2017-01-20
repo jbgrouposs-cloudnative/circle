@@ -18,7 +18,7 @@ namespace Circle.Repositories.Article {
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        ArticleData GetArticle(int articleId);
+        ArticleData GetArticle(string articleId);
 
         /// <summary>
         /// 記事を保存する

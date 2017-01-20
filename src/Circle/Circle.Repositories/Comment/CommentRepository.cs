@@ -15,11 +15,11 @@ namespace Circle.Repositories.Comment {
             this.client = DocumentDBResolver.GetClient(); // DocumentDBクライアントを取得
         }
 
-        public List<CommentData> GetComments(int articleId) {
+        public List<CommentData> GetComments(string articleId) {
             throw new NotImplementedException();
         }
 
-        public CommentData SaveComment(int articleId, CommentData comment) {
+        public CommentData SaveComment(string articleId, CommentData comment) {
             throw new NotImplementedException();
         }
 

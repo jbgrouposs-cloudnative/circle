@@ -76,6 +76,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Circle.Repositories.Mock\Circle.Repositories.Mock.csproj">
+      <Project>{4538625A-D3FF-4E88-B192-930A3BE46363}</Project>
+      <Name>Circle.Repositories.Mock</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Circle.Repositories\Circle.Repositories.csproj">
       <Project>{98cd8dc8-e552-4e4b-90f4-311cc06151a6}</Project>
       <Name>Circle.Repositories</Name>
