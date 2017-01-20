@@ -42,7 +42,7 @@ namespace Circle.WebAPI.Controllers {
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        [Route("articles /{articleId: int}")]
+        [Route("articles/{articleId}")]
         public ArticleData GetArticle(string articleId) {
             try {
                 var article = articleRepository.GetArticle(articleId);
@@ -74,7 +74,7 @@ namespace Circle.WebAPI.Controllers {
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        [Route("articles/{articleId:int}/comments")]
+        [Route("articles/{articleId}/comments")]
         public List<CommentData> GetCommentsByArticle(string articleId) {
             try {
                 var comments = commentRepository.GetComments(articleId);
@@ -90,7 +90,7 @@ namespace Circle.WebAPI.Controllers {
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        [Route("articles/{articleId:int}/comments")]
+        [Route("articles/{articleId}/comments")]
         public CommentData PostComment(string articleId, CommentData comment) {
             try {
                 var savedComment = commentRepository.SaveComment(articleId, comment);
