@@ -31,9 +31,16 @@ namespace Circle.Repositories.Article {
             throw new NotImplementedException();
         }
 
-        public List<ArticleData> GetArticles() {
+        public List<ArticleData> GetArticles()
+        {
+
+            return this.client.CreateDocumentQuery<ArticleData>(
+                UriFactory.CreateDocumentCollectionUri(this.dbname, this.colname)
+                ).AsEnumerable().ToList<ArticleData>();
+
             throw new NotImplementedException();
         }
+
 
         public async Task<ArticleData> SaveArticle(ArticleData article)
         {

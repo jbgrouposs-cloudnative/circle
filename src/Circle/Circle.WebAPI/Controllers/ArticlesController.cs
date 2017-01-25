@@ -28,11 +28,13 @@ namespace Circle.WebAPI.Controllers {
         /// <returns></returns>
         [Route("articles")]
         public List<ArticleData> GetArticles() {
-            try {
-                var articles = articleRepository.GetArticles();
-                return articles;
+            try
+            {
+                var article = articleRepository.GetArticles();
+                return article;
             }
-            catch( Exception ) {
+            catch (Exception)
+            {
                 throw new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
             }
         }
