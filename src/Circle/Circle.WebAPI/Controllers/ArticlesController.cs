@@ -93,10 +93,17 @@ namespace Circle.WebAPI.Controllers {
         /// <param name="articleId"></param>
         /// <returns></returns>
         [Route("articles/{articleId}/comments")]
-        public CommentData PostComment(string articleId, CommentData comment) {
+        public async Task<CommentData> PostComment(string articleId, CommentData comment) {
             try {
-                var savedComment = commentRepository.SaveComment(articleId, comment);
-                return savedComment;
+                if( comment.ArticleId == null ) {
+                    comment.ArticleId = articleId;
+                }
+                else if( comment.ArticleId != articleId ) {
+                    // POSTデータの中に書いてあるarticleIdとURLで指定されたarticleIdが一致していない場合、BadRequestでエラーにする
+                    throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
+                }
+
+                return await commentRepository.SaveComment(comment);
             }
             catch( Exception ) {
                 throw new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);

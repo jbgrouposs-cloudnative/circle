@@ -19,6 +19,6 @@ namespace Circle.Repositories.Comment {
         /// <param name="articleId"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
-        CommentData SaveComment(string articleId, CommentData comment);
+        Task<CommentData> SaveComment(CommentData comment);
     }
 }

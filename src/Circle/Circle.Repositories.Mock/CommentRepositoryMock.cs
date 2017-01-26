@@ -18,8 +18,8 @@ namespace Circle.Repositories.Mock {
             };
         }
 
-        public CommentData SaveComment(string articleId, CommentData comment) {
-            return comment;
+        public Task<CommentData> SaveComment(CommentData comment) {
+            return Task.Run<CommentData>(() => comment);
         }
     }
 }

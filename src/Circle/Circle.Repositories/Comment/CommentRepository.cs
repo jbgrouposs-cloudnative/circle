@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Documents.Client;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,17 +22,25 @@ namespace Circle.Repositories.Comment {
         }
 
         public List<CommentData> GetComments(string articleId) {
-            return this.client.CreateDocumentQuery<CommentData>(
-                UriFactory.CreateDocumentCollectionUri(this.dbname, this.colname)
-                ).Where(document => document.Id == articleId).AsEnumerable().ToList<CommentData>();
+            return this.client.CreateDocumentQuery<CommentData>(GetDocumentCollectionUri())
+                .Where(document => document.ArticleId == articleId)
+                .AsEnumerable()
+                .ToList<CommentData>();
         }
 
-        public CommentData SaveComment(string articleId, CommentData comment) {
-            throw new NotImplementedException();
+        public async Task<CommentData> SaveComment(CommentData comment) {
+            var response = await client.CreateDocumentAsync(GetDocumentCollectionUri(), comment);
+            var savedComment = JsonConvert.DeserializeObject<CommentData>(response.Resource.ToString());
+
+            return savedComment;
         }
 
         public void Dispose() {
             client.Dispose(); // DocumentDBへの接続を破棄
+        }
+
+        private Uri GetDocumentCollectionUri() {
+            return UriFactory.CreateDocumentCollectionUri(this.dbname, this.colname);
         }
     }
 }

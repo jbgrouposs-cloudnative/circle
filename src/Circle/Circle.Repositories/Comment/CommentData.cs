@@ -19,6 +19,12 @@ namespace Circle.Repositories.Comment {
         public string Id { get; set; }
 
         /// <summary>
+        /// コメント対象の記事ID
+        /// </summary>
+        [JsonProperty("article_id")]
+        public string ArticleId { get; set; }
+
+        /// <summary>
         /// コメント本文
         /// </summary>
         [JsonProperty("body")]

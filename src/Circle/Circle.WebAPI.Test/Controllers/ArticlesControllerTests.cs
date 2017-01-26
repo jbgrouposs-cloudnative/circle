@@ -26,6 +26,7 @@ namespace Circle.WebAPI.Controllers.Tests {
                     var r = articlesController.GetArticles();
 
                     Assert.IsNotNull(r);
+                    Assert.IsTrue(r.Count > 0, "article counts is greater than 0");
                 }
                 catch( Exception e ) {
                     Assert.Fail(e.Message, e);
@@ -52,14 +53,14 @@ namespace Circle.WebAPI.Controllers.Tests {
 
         [TestMethod]
         public void GetCommentsByArticle() {
-            var articleId = "2c3322a2-e85b-498f-9773-d420e6b4c064";
-
+            var articleId = "efc9b93e-e4c4-47db-b8b2-2e67fd408463";
+            
             using ( var articlesController = GetArticlesController() ) {
                 try {
                     var r = articlesController.GetCommentsByArticle(articleId);
 
                     Assert.IsNotNull(r);
-
+                    Assert.IsTrue(r.Count > 0, "comment counts is greater than 0");
                 }
                 catch( Exception e ) {
                     Assert.Fail(e.Message, e);
@@ -167,7 +168,7 @@ namespace Circle.WebAPI.Controllers.Tests {
                 using( var articlesController = GetArticlesController() ) {
                     try {
                         var r1 = await articlesController.PostArticle(new ArticleData());
-                        var r2 = articlesController.PostComment(r1.Id, new CommentData() {
+                        var r2 = await articlesController.PostComment(r1.Id, new CommentData() {
                             Body = "コメント本文",
                             Created = DateTime.Now,
                             OwnerName = "高木俊一",
@@ -192,7 +193,7 @@ namespace Circle.WebAPI.Controllers.Tests {
             Task.Run(async () => {
                 using( var articlesController = GetArticlesController() ) {
                     var r1 = await articlesController.PostArticle(new ArticleData());
-                    var r2 = articlesController.PostComment(r1.Id, new CommentData() {
+                    var r2 = await articlesController.PostComment(r1.Id, new CommentData() {
                         Body = "コメント本文",
                         Created = DateTime.Now,
                         OwnerName = "高木俊一",
