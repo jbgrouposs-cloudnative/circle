@@ -52,9 +52,9 @@ namespace Circle.WebAPI.Controllers.Tests {
 
         [TestMethod]
         public void GetCommentsByArticle() {
-            var articleId = Guid.NewGuid().ToString();
+            var articleId = "2c3322a2-e85b-498f-9773-d420e6b4c064";
 
-            using( var articlesController = GetArticlesController() ) {
+            using ( var articlesController = GetArticlesController() ) {
                 try {
                     var r = articlesController.GetCommentsByArticle(articleId);
 

@@ -27,8 +27,6 @@ namespace Circle.Repositories.Article {
             return this.client.CreateDocumentQuery<ArticleData>(
                UriFactory.CreateDocumentCollectionUri(this.dbname, this.colname)
                ).Where(document => document.Id == articleId).AsEnumerable().SingleOrDefault();
-            
-            throw new NotImplementedException();
         }
 
         public List<ArticleData> GetArticles()

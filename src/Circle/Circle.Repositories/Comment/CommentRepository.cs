@@ -21,7 +21,9 @@ namespace Circle.Repositories.Comment {
         }
 
         public List<CommentData> GetComments(string articleId) {
-            throw new NotImplementedException();
+            return this.client.CreateDocumentQuery<CommentData>(
+                UriFactory.CreateDocumentCollectionUri(this.dbname, this.colname)
+                ).Where(document => document.Id == articleId).AsEnumerable().ToList<CommentData>();
         }
 
         public CommentData SaveComment(string articleId, CommentData comment) {
